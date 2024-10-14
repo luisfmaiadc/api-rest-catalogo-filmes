@@ -1,0 +1,8 @@
+CREATE TABLE filme (
+  id INT NOT NULL AUTO_INCREMENT,
+  titulo VARCHAR(300) NOT NULL,
+  diretor VARCHAR(150) NOT NULL,
+  genero VARCHAR(100) NOT NULL,
+  ano_lancamento YEAR NOT NULL,
+  PRIMARY KEY (id)
+  );
