@@ -41,7 +41,7 @@ git@github.com:luisfmaiadc/api-rest-catalogo-filmes.git
 CREATE DATABASE dbFilme;
 ```
 
-<p style="margin-top: 20";>Não é necessário se preocupar com a criação da tabela FILME manualmente, pois estou utilizando o Flyway para gerenciar as migrações do banco de dados. Assim, ao rodar o projeto, a tabela será criada automaticamente.</p>
+<p style="margin-top: 20;">Não é necessário se preocupar com a criação da tabela FILME manualmente, pois estou utilizando o Flyway para gerenciar as migrações do banco de dados. Assim, ao rodar o projeto, a tabela será criada automaticamente.</p>
 
 A tabela deve conter os seguintes campos:
 
@@ -55,7 +55,7 @@ A tabela deve conter os seguintes campos:
 
 A API oferece os seguintes endpoints para realizar as operações de CRUD no catálogo de filmes:
 ​
-| route               | description                                          
+| Rota               | Descrição                                          
 |----------------------|-----------------------------------------------------
 | <kbd>GET /filmes</kbd>     | Retorna a lista de todos os filmes cadastrados no banco de dados. [response details](#get-filmes)
 | <kbd>GET /filmes/{genero}</kbd>     | Retorna uma lista de filmes a partir de seu genêro. [response details](#get-filmes-genero)
