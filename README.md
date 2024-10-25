@@ -41,7 +41,7 @@ git@github.com:luisfmaiadc/api-rest-catalogo-filmes.git
 CREATE DATABASE dbFilme;
 ```
 
-<p style="margin-top: 20";>Não é necessário se preocupar com a criação da tabela FILME manualmente, pois estou utilizando o Flyway para gerenciar as migrações do banco de dados. Assim, ao rodar o projeto, a tabela será criada automaticamente.</p>
+<p style="margin-top: 20;">Não é necessário se preocupar com a criação da tabela FILME manualmente, pois estou utilizando o Flyway para gerenciar as migrações do banco de dados. Assim, ao rodar o projeto, a tabela será criada automaticamente.</p>
 
 A tabela deve conter os seguintes campos:
 
@@ -138,3 +138,6 @@ A API oferece os seguintes endpoints para realizar as operações de CRUD no cat
           <b>Luis Felipe Maia da Costa</b>
         </sub>
       </a>
+    </td>
+  </tr>
+</table>

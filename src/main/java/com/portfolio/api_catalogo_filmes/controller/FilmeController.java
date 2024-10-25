@@ -2,15 +2,18 @@ package com.portfolio.api_catalogo_filmes.controller;
 
 import com.portfolio.api_catalogo_filmes.dto.DadosAtualizacaoFilme;
 import com.portfolio.api_catalogo_filmes.dto.DadosFilme;
-import com.portfolio.api_catalogo_filmes.model.Filme;
-import com.portfolio.api_catalogo_filmes.model.Genero;
+import com.portfolio.api_catalogo_filmes.domain.Filme;
+import com.portfolio.api_catalogo_filmes.domain.Genero;
 import com.portfolio.api_catalogo_filmes.repository.FilmesRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,31 +25,39 @@ public class FilmeController {
 
     @PostMapping
     @Transactional
-    public void cadastrarFilme(@RequestBody @Valid DadosFilme dados) {
-        repository.save(new Filme(dados));
+    public ResponseEntity cadastrarFilme(@RequestBody @Valid DadosFilme dados, UriComponentsBuilder uriComponentsBuilder) {
+        Filme filme = new Filme(dados);
+        repository.save(filme);
+        URI uri = uriComponentsBuilder.path("/filme/{id}").buildAndExpand(filme.getId()).toUri();
+        return ResponseEntity.created(uri).body(dados);
     }
 
     @GetMapping
-    public List<DadosFilme> buscarFilmes() {
-        return repository.findAll().stream().map(DadosFilme::new).toList();
+    public ResponseEntity<List<DadosFilme>> buscarFilmes() {
+        var list = repository.findAll().stream().map(DadosFilme::new).toList();
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{genero}")
-    public List<DadosFilme> buscarFilmePorGenero(@PathVariable Genero genero) {
-        return repository.findByGenero(genero);
+    public ResponseEntity<List<DadosFilme>> buscarFilmePorGenero(@PathVariable Genero genero) {
+        var list = repository.findByGenero(genero);
+        return ResponseEntity.ok(list);
     }
 
     @PutMapping
     @Transactional
-    public void atualizarFilme(@RequestBody @Valid DadosAtualizacaoFilme dados) {
+    public ResponseEntity atualizarFilme(@RequestBody @Valid DadosAtualizacaoFilme dados) {
         Filme filme = repository.getReferenceById(dados.id());
         filme.atualizarFilme(dados);
+        DadosFilme dadosFilmeAtualizado = new DadosFilme(filme);
+        return ResponseEntity.ok(dadosFilmeAtualizado);
     }
 
     @DeleteMapping("/{id}")
     @Transactional
-    public void deletarFilme(@PathVariable Integer id) {
+    public ResponseEntity deletarFilme(@PathVariable Integer id) {
         Filme filme = repository.getReferenceById(id);
         repository.delete(filme);
+        return ResponseEntity.noContent().build();
     }
 }

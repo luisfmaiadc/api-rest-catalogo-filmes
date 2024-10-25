@@ -1,4 +1,4 @@
-package com.portfolio.api_catalogo_filmes.model;
+package com.portfolio.api_catalogo_filmes.domain;
 
 public enum Genero {
     ACAO,
