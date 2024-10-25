@@ -55,7 +55,7 @@ A tabela deve conter os seguintes campos:
 
 A API oferece os seguintes endpoints para realizar as operações de CRUD no catálogo de filmes:
 ​
-| route               | description                                          
+| Rota               | Descrição                                          
 |----------------------|-----------------------------------------------------
 | <kbd>GET /filmes</kbd>     | Retorna a lista de todos os filmes cadastrados no banco de dados. [response details](#get-filmes)
 | <kbd>GET /filmes/{genero}</kbd>     | Retorna uma lista de filmes a partir de seu genêro. [response details](#get-filmes-genero)
