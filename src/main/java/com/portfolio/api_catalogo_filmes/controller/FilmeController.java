@@ -2,8 +2,8 @@ package com.portfolio.api_catalogo_filmes.controller;
 
 import com.portfolio.api_catalogo_filmes.dto.DadosAtualizacaoFilme;
 import com.portfolio.api_catalogo_filmes.dto.DadosFilme;
-import com.portfolio.api_catalogo_filmes.domain.Filme;
-import com.portfolio.api_catalogo_filmes.domain.Genero;
+import com.portfolio.api_catalogo_filmes.domain.filme.Filme;
+import com.portfolio.api_catalogo_filmes.domain.filme.Genero;
 import com.portfolio.api_catalogo_filmes.repository.FilmesRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

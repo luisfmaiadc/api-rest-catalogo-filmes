@@ -1,4 +1,4 @@
-package com.portfolio.api_catalogo_filmes.domain;
+package com.portfolio.api_catalogo_filmes.domain.filme;
 
 import com.portfolio.api_catalogo_filmes.dto.DadosAtualizacaoFilme;
 import com.portfolio.api_catalogo_filmes.dto.DadosFilme;
