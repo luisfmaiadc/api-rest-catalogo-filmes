@@ -2,6 +2,7 @@ package com.portfolio.api_catalogo_filmes.infra.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,13 +19,17 @@ public class ApiExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity handleInvalidArgument(MethodArgumentNotValidException exception) {
         var error =exception.getFieldErrors();
-        return ResponseEntity.badRequest().body(error.stream().map(DadosErroCadastro::new).toList());
+        return ResponseEntity.badRequest().body(error.stream().map(DadosErro::new).toList());
     }
 
-    private record DadosErroCadastro(String campo, String mensagem) {
-        DadosErroCadastro(FieldError fieldError) {
+    private record DadosErro(String campo, String mensagem) {
+        DadosErro(FieldError fieldError) {
             this(fieldError.getField(), fieldError.getDefaultMessage());
         }
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity handleBadCredentials(BadCredentialsException exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage());
+    }
 }
