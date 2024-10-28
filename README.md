@@ -138,7 +138,9 @@ A API oferece os seguintes endpoints para realizar as operações de CRUD no cat
 Este projeto utiliza autenticação baseada em <b>JSON Web Token (JWT)</b> para proteger os endpoints da API. Para acessar as rotas protegidas, é necessário realizar o login com um usuário válido e, em seguida, utilizar o token JWT gerado como Bearer Token em cada requisição.
 
 <h3>Realizando Login</h3>
-Para obter o token JWT, envie uma requisição POST para o endpoint <b>/login</b> como o seguinte JSON no corpo da requisição:
+<p style="margin-bottom=5">Para obter o token JWT, envie uma requisição POST para o endpoint <b>/login</b> como o seguinte JSON no corpo da requisição:</p>
+
+**REQUEST**
 ```json
 {
   "email": "teste@teste.com",
@@ -149,6 +151,7 @@ Para obter o token JWT, envie uma requisição POST para o endpoint <b>/login</b
 Se as credenciais forem válidas, a resposta incluirá um token JWT que você deverá utilizar como Bearer Token nas próximas requisições.
 
 <h4>Exemplo de Resposta de Sucesso</h4>
+
 ```json
 {
   "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsdWlzZm1haWFkYyIsInN1YiI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTczMDE0NjA5N30.COpA2a2Env_Uke-CclCjL9ndl6YQa8gfKca1U1oiX7Y"
@@ -156,7 +159,8 @@ Se as credenciais forem válidas, a resposta incluirá um token JWT que você de
 ```
 
 <h3>Usando o Token JWT nas Requisições</h3>
-Inclua o token JWT no cabeçalho Authorization das requisições, conforme o exemplo abaixo:
+<p style="margin-bottom=5">Inclua o token JWT no cabeçalho Authorization das requisições, conforme o exemplo abaixo:</p>
+
 ```http
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
