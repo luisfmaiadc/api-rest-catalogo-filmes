@@ -152,6 +152,7 @@ Se as credenciais forem válidas, a resposta incluirá um token JWT que você de
 
 <h4>Exemplo de Resposta de Sucesso</h4>
 
+**RESPONSE**
 ```json
 {
   "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsdWlzZm1haWFkYyIsInN1YiI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTczMDE0NjA5N30.COpA2a2Env_Uke-CclCjL9ndl6YQa8gfKca1U1oiX7Y"
