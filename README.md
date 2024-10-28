@@ -4,6 +4,7 @@
   <a href="#cloning">Clonando</a> •
  <a href="#creating">Banco de Dados</a> •
  <a href="#routes">API Endpoints</a> •
+<a href="#authentication">Autenticação</a> •
  <a href="#colab">Colaboradores</a>
 </p>
 
@@ -12,12 +13,12 @@
     <img src="https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white" alt="Spring" />
     <img src="https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
     <img src="https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white" alt="Hibernate" />
+    <img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens" alt="JSON Web Token (JWT)" />
     <img src="https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white" alt="Apache Maven" />
     <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white" alt="Postman" />
 </p>
 
-<p style="text-align: justify;">Este projeto é uma API REST desenvolvida com Spring Boot 3.3.4 e Java 21, que realiza operações CRUD (Create, Read, Update, Delete) em um Catálogo de Filmes armazenado em um banco de dados MySQL. Utilizei JPA com o Hibernate como provedor de persistência para o mapeamento objeto-relacional.</p>
-
+<p style="text-align: justify;">Este projeto é uma API REST desenvolvida com Spring Boot 3.3.4 e Java 21, que realiza operações CRUD (Create, Read, Update, Delete) em um Catálogo de Filmes armazenado em um banco de dados MySQL. A segurança é implementada com o Spring Security, onde as senhas dos usuários são armazenadas com hashing BCrypt para maior proteção. A autenticação é feita via JSON Web Token (JWT), permitindo que o usuário obtenha um token após o login e o utilize para acessar os endpoints protegidos da aplicação. Utilizei JPA com o Hibernate como provedor de persistência para o mapeamento objeto-relacional.</p>
 <h2 id="started">🚀 Começando</h2>
 
 Antes de começar, verifique se você possui as seguintes ferramentas instaladas em sua máquina:
@@ -41,15 +42,21 @@ git@github.com:luisfmaiadc/api-rest-catalogo-filmes.git
 CREATE DATABASE dbFilme;
 ```
 
-<p style="margin-top: 20;">Não é necessário se preocupar com a criação da tabela FILME manualmente, pois estou utilizando o Flyway para gerenciar as migrações do banco de dados. Assim, ao rodar o projeto, a tabela será criada automaticamente.</p>
+<p style="margin-top: 20;">Não é necessário se preocupar com a criação da tabela FILME ou USUARIO manualmente, pois estou utilizando o Flyway para gerenciar as migrações do banco de dados. Assim, ao rodar o projeto, a tabela será criada automaticamente.</p>
 
-A tabela deve conter os seguintes campos:
+A tabela <i>filme</i> deve conter os seguintes campos:
 
 - <b>id:</b> chave primária, auto-incrementada pelo banco de dados
 - <b>titulo:</b> campo de texto (String) com até 300 caracteres
 - <b>diretor:</b> campo de texto (String) com até 150 caracteres
 - <b>genero:</b> campo de texto (String) com até 100 caracteres
 - <b>ano_lancamento:</b> campo do tipo year
+
+A tabela <i>usuario</i> deve conter os seguintes campos:
+
+- <b>id:</b> chave primária, auto-incrementada pelo banco de dados
+- <b>email:</b> campo de texto (String) com até 255 caracteres
+- <b>password:</b> campo de texto (String) com até 255 caracteres
 
 <h2 id="routes">📍 API Endpoints</h2>
 
@@ -126,6 +133,35 @@ A API oferece os seguintes endpoints para realizar as operações de CRUD no cat
 ```
 
 <b>Obs.</b> Para validar o funcionamento da API, utilizei o Postman para realizar requisições e verificar as respostas dos endpoints.
+
+<h2 id="authentication">🔑 Autenticação</h2>
+Este projeto utiliza autenticação baseada em <b>JSON Web Token (JWT)</b> para proteger os endpoints da API. Para acessar as rotas protegidas, é necessário realizar o login com um usuário válido e, em seguida, utilizar o token JWT gerado como Bearer Token em cada requisição.
+
+<h3>Realizando Login</h3>
+Para obter o token JWT, envie uma requisição POST para o endpoint <b>/login</b> como o seguinte JSON no corpo da requisição:
+```json
+{
+  "email": "teste@teste.com",
+  "password": "root"
+}
+```
+
+Se as credenciais forem válidas, a resposta incluirá um token JWT que você deverá utilizar como Bearer Token nas próximas requisições.
+
+<h4>Exemplo de Resposta de Sucesso</h4>
+```json
+{
+  "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsdWlzZm1haWFkYyIsInN1YiI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTczMDE0NjA5N30.COpA2a2Env_Uke-CclCjL9ndl6YQa8gfKca1U1oiX7Y"
+}
+```
+
+<h3>Usando o Token JWT nas Requisições</h3>
+Inclua o token JWT no cabeçalho Authorization das requisições, conforme o exemplo abaixo:
+```http
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+<b>Obs.</b> Para realizar a autenticação é necessário ter um usuário cadastrado com e-mail e senha (Bcrypt) na tabela <i>usuario</i> no seu banco de dados.
 
 <h2 id="colab">🤝 Colaboradores</h2>
 <p style="margin-bottom: 20;">Este projeto foi desenvolvido por mim e marca minha primeira experiência na criação de uma API REST. Foi uma jornada enriquecedora que contribuiu para meu crescimento como desenvolvedor.</p>
